@@ -7,7 +7,6 @@ from PIL import Image
 # Convert encoding data into 8-bit binary
 # form using ASCII value of characters
 def genData(data):
-
 		# list of binary codes
 		# of given data
 		newd = []
@@ -114,25 +113,20 @@ def decode():
 				binstr += '0'
 			else:
 				binstr += '1'
-
 		data += chr(int(binstr, 2))
 		if (pixels[-1] % 2 != 0):
 			return data
 
 # Main Function
 def main():
-	a = int(input(":: Welcome to Steganography ::\n"
-						"1. Encode\n2. Decode\n"))
-	if (a == 1):
-		encode()
-
-	elif (a == 2):
-		print("Decoded Word : " + decode())
-	else:
-		raise Exception("Enter correct input")
+    a = int(input(":: Welcome to Steganography ::\n""1. Encode\n2. Decode\n"))
+    if (a == 1):
+        encode()
+    elif (a == 2):
+        print("Decoded Word : " + decode())
+    else:
+        raise Exception("Enter correct input")
 
 # Driver Code
 if __name__ == '__main__' :
-
-	# Calling main function
 	main()
