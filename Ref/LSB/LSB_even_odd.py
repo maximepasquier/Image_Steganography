@@ -121,7 +121,6 @@ def decode():
 
         # string of binary data
         binstr = ""
-        
 
         for i in pixels[:8]:
             if i % 2 == 0:
@@ -132,7 +131,6 @@ def decode():
         print(pixels[-1])
         if pixels[-1] % 2 != 0:
             return data
-
 
 
 def main():
