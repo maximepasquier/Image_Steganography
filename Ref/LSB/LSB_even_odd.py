@@ -13,7 +13,7 @@ def encode():
     if len(data_to_hide) == 0:
         raise ValueError("Texte vide !")
 
-    #print(image.size)
+    # print(image.size)
 
     image_with_hidden_data = image.copy()
     hide_data(image_with_hidden_data, data_to_hide)
@@ -121,6 +121,7 @@ def decode():
 
         # string of binary data
         binstr = ""
+        
 
         for i in pixels[:8]:
             if i % 2 == 0:
@@ -128,8 +129,10 @@ def decode():
             else:
                 binstr += "1"
         data += chr(int(binstr, 2))
+        print(pixels[-1])
         if pixels[-1] % 2 != 0:
             return data
+
 
 
 def main():

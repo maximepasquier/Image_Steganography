@@ -6,10 +6,6 @@ def encode():
     pass
 
 
-def genData(data):
-    pass
-
-
 def decode():
     pass
 
