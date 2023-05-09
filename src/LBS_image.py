@@ -47,6 +47,13 @@ img.save(image_filename)
 stego_image = cover_image.copy()
 hide_secret(cover_image,secret_image,stego_image)
 
+stego_image_path = (
+    os.getcwd()
+    + "/Images/stego_LSB.png"
+)
+stego_image_PIL = Image.fromarray(stego_image,"RGB")
+stego_image_PIL.save(stego_image_path)
+
 
 #* Decrypte
 reconstructed_image = stego_image.copy()
