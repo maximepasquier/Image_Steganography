@@ -13,10 +13,10 @@ def hide_secret(cover,secret,stego):
                 cover_value = cast(pointer(c_float(cover[i,j,k])), POINTER(c_int64)).contents.value
                 #print(cover[i,j,k])
                 secret_value = secret[i,j,k]
-                cover_value = cover_value & 0b1111111111111111111111111111110000111111111111111111111111111111
-                secret_value = secret_value >> 4
-                secret_value = cover_value | (secret_value << 30)
-                stego[i,j,k] = cast(pointer(c_int64(cover_value)), POINTER(c_float)).contents.value
+                cover_value = cover_value & 0b1111111111111111111111111111111111111111111111111111111100000000
+                #secret_value = secret_value >> 4
+                secret_value = cover_value | secret_value
+                stego[i,j,k] = cast(pointer(c_int64(secret_value)), POINTER(c_float)).contents.value
                 #print(stego[i,j,k])
                 #return
                 
@@ -26,7 +26,7 @@ def recover_image(reconstruct,stego):
         for j in range(stego.shape[1]):
             for k in range(stego.shape[2]):
                 stego_value = cast(pointer(c_float(stego_dct[i,j,k])), POINTER(c_int64)).contents.value
-                reconstruct[i,j,k] = ((stego_value & 0b0000000000000000000000000000001111000000000000000000000000000000) >> 30) << 4
+                reconstruct[i,j,k] = (stego_value & 0b11111111)
                 
 
 #* Open images
@@ -61,6 +61,8 @@ stego_image_PIL.save(stego_image_path)
 #* Decrypte
 reconstructed_image = stego_image.copy()
 recover_image(reconstructed_image,stego_image)
+
+print(reconstructed_image)
 
 reconstructed_image_path = (
     os.getcwd()
