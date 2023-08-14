@@ -1,7 +1,7 @@
 import numpy as np
 import skimage
 from PIL import Image
-from scipy.fftpack import fft, dct, idct, ifft
+from scipy.fft import fft, dct, idct, ifft
 import os
 import cv2
 import scipy.signal
@@ -26,6 +26,7 @@ def hide_data(img,data):
                     bits = bits & 0b1111111111111111111111111111111111111111111111111111111111111110
                 else:
                     bits = bits | 0b0000000000000000000000000000000000000000000000000000000000000001
+                    #print(bits)
                 img[i,j,k] = cast(pointer(c_int64(bits)), POINTER(c_float)).contents.value
                 iterator += 1
                 if iterator == str_len:
@@ -54,7 +55,7 @@ def recover_data(img,data):
 #* Open image
 image_path = (
     os.getcwd()
-    + "/Images/img.png"
+    + "/Images/cover.png"
 )
 image_PIL = Image.open(image_path, "r")
 image = np.asarray(image_PIL)
@@ -70,6 +71,19 @@ image_ifft = ifft(image_fft).astype("int")
 image_with_hidden_data_dct = image_dct.copy()
 hide_data(image_with_hidden_data_dct,"Ceci est du texte caché dans les coefficients du cosinus.")
 image_with_hidden_data_idct = idct(image_with_hidden_data_dct,norm = 'ortho')
+
+
+'''
+#print(type(image_with_hidden_data_idct[0,0,0]))
+
+for i in range(image_with_hidden_data_idct.shape[0]):
+    for j in range(image_with_hidden_data_idct.shape[1]):
+        for k in range(image_with_hidden_data_idct.shape[2]):
+            image_with_hidden_data_idct[i,j,k] = round(image_with_hidden_data_idct[i,j,k])
+image_with_hidden_data_idct = image_with_hidden_data_idct.astype("uint8") 
+
+print(image_with_hidden_data_idct[0])
+'''
 
 #* Decrypte
 data = ''

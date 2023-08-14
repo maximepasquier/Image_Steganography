@@ -10,15 +10,15 @@ def hide_secret(cover,secret,stego):
             for k in range(cover.shape[2]):
                 cover_value = cover[i,j,k]
                 secret_value = secret[i,j,k]
-                cover_value = cover_value & 0b11110000
-                secret_value = secret_value >> 4
+                cover_value = cover_value & 0b11000000
+                secret_value = secret_value >> 2
                 stego[i,j,k] = cover_value | secret_value
                 
 def recover_image(reconstruct,stego):
     for i in range(stego.shape[0]):
         for j in range(stego.shape[1]):
             for k in range(stego.shape[2]):
-                reconstruct[i,j,k] = (stego[i,j,k] & 0b00001111) << 4
+                reconstruct[i,j,k] = (stego[i,j,k] & 0b00111111) << 2
                 
 
 #* Open images
@@ -49,7 +49,7 @@ hide_secret(cover_image,secret_image,stego_image)
 
 stego_image_path = (
     os.getcwd()
-    + "/Images/stego_LSB.png"
+    + "/Images/stego_LSB_6.png"
 )
 stego_image_PIL = Image.fromarray(stego_image,"RGB")
 stego_image_PIL.save(stego_image_path)
@@ -61,7 +61,7 @@ recover_image(reconstructed_image,stego_image)
 
 reconstructed_image_path = (
     os.getcwd()
-    + "/Images/reconstructed_LSB.png"
+    + "/Images/reconstructed_LSB_6.png"
 )
 reconstructed_image_PIL = Image.fromarray(reconstructed_image,"RGB")
 reconstructed_image_PIL.save(reconstructed_image_path)
