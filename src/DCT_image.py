@@ -80,12 +80,14 @@ stego_image_dct = hide_secret(cover_image_dct, secret_image, stego_image_dct)
 #stego_image = idct(stego_image_dct, norm="ortho").astype("uint8")
 stego_image = idct(stego_image_dct, norm="ortho")
 
+'''
 #* Transform stego image to uint values
 for i in range(stego_image.shape[0]):
     for j in range(stego_image.shape[1]):
         for k in range(stego_image.shape[2]):
             stego_image[i,j,k] = round(stego_image[i,j,k])
 stego_image = stego_image.astype("uint8")
+'''
 
 stego_image_path = os.getcwd() + "/Images/stego_DCT.png"
 stego_image_PIL = Image.fromarray(stego_image, "RGB")
