@@ -1,1 +1,7 @@
-# Image_Steganography
+# Stéganographie d'image
+
+La stéganographie d'images est une technique qui vise à dissimuler des informations au sein d'images de manière à ce que cela ne soit pas détectable par l'œil humain. Cette étude explore les méthodes LSB (Least Significant Bit) et DCT (Transformée en Cosinus Discrète) utilisées pour effectuer la stéganographie d'images, en mettant en évidence à la fois leurs avantages et leurs limitations.
+
+L'objectif de cette recherche est d'explorer les méthodes classiques de LSB (Least Significant Bit) et de DCT (Discrete Cosine Transform) pour la stéganographie. Nous avons développé une implémentation de ces deux méthodes et analysé leurs vulnérabilités face aux attaques. Cependant, il est important de noter que la méthode LSB dans le domaine spatial présente des limites en termes de capacité de dissimulation, car un excès de modification des bits peut éveiller des soupçons quant à la présence d'un message caché. De plus, les histogrammes des images stéganographiques peuvent révéler la présence du message, ce qui rend ces méthodes classiques de LSB peu discrètes.
+
+En ce qui concerne la méthode DCT, elle a montré des améliorations par rapport à la méthode LSB dans le domaine spatial. Cependant, la mise en œuvre correcte de la stéganographie avec DCT a posé des défis. Malgré cela, nous avons obtenu des résultats prometteurs. La DCT permet une reconstitution de meilleure qualité sur le plan quantitatif, même si visuellement, le résultat peut être moins satisfaisant. En outre, elle offre la possibilité de dissimuler et de récupérer une grande quantité d'informations.

@@ -2,6 +2,7 @@ import numpy as np
 from PIL import Image
 import os
 
+
 def hide_data(img,data):
     binary_data = ''.join(format(ord(i), '08b') for i in data)
     str_len = len(binary_data)
@@ -16,10 +17,10 @@ def hide_data(img,data):
                 iterator += 1
                 if iterator == str_len:
                     return
-    
+
 
 def encode():
-    #* Open image
+    # Open image
     image_path = (
         os.getcwd()
         + "/Images/"
@@ -28,19 +29,19 @@ def encode():
     image_PIL = Image.open(image_path, "r")
     image = np.asarray(image_PIL)
     
-    #* Get text to hide in cover image
+    # Get text to hide in cover image
     data_to_hide = input("Entrez le texte à cacher dans l'image : ")
     if len(data_to_hide) == 0:
         raise ValueError("Texte vide !")
     
-    #* Hide text data into cover image
+    # Hide text data into cover image
     image_with_hidden_data = image.copy()
     hide_data(image_with_hidden_data, data_to_hide)
     
-    #* Numpy array back to PIL Image
+    # Numpy array back to PIL Image
     image_with_hidden_data_PIL = Image.fromarray(image_with_hidden_data)
     
-    #* Save stego image
+    # Save stego image
     image_with_hidden_data_name = (
         os.getcwd()
         + "/Images/"
@@ -50,11 +51,13 @@ def encode():
         image_with_hidden_data_name,
         str(image_with_hidden_data_name.split(".")[1].upper()),
     )
-    
+
+
 def BinaryToDecimal(binary):
     string = int(binary, 2)
     return string
-    
+
+
 def recover_data(img,data):
     binary_data = ''
     str_data = ''
@@ -73,7 +76,7 @@ def recover_data(img,data):
                         decimal_data = BinaryToDecimal(temp_data)
                         str_data = str_data + chr(decimal_data)
                     return str_data
-    
+
 
 def decode():
     img = (
@@ -103,6 +106,7 @@ def main():
         print("Le texte décodé est : " + decode())
     else:
         raise Exception("Input invalide !")
+
 
 if __name__ == "__main__":
     main()
